@@ -222,3 +222,17 @@ class NokiaClassics:
         new_head = self._clamp_head(head)
         if new_head is None:
             return
+        if self._collides_self(new_head):
+            self._alive = False
+            return
+        if self._collides_barrel(new_head):
+            self._alive = False
+            return
+        self._worm.insert(0, new_head)
+        gx, gy = self._cfg.goal_pos
+        if new_head.x == gx and new_head.y == gy:
+            self._score += self._cfg.goal_bonus
+            self._goal_reached += 1
+        if new_head.x == self._pellet.x and new_head.y == self._pellet.y:
+            self._score += self._cfg.score_per_pellet
+            self._spawn_pellet()
