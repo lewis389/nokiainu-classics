@@ -166,3 +166,17 @@ class NokiaClassics:
     def goal_reached_count(self) -> int:
         return self._goal_reached
 
+    @property
+    def barrels(self) -> tuple[Barrel, ...]:
+        return tuple(self._barrels)
+
+    def turn_left(self) -> None:
+        if not self._alive:
+            return
+        self._heading = Dir((self._heading - 1) % 4)
+
+    def turn_right(self) -> None:
+        if not self._alive:
+            return
+        self._heading = Dir((self._heading + 1) % 4)
+
