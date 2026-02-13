@@ -208,3 +208,17 @@ class NokiaClassics:
         return None
 
     def _collides_self(self, head: Segment) -> bool:
+        return any(p.x == head.x and p.y == head.y for p in self._worm)
+
+    def _collides_barrel(self, head: Segment) -> bool:
+        return any(b.x == head.x and b.y == head.y for b in self._barrels)
+
+    def tick(self) -> None:
+        """Advance one game tick: move worm, barrels, check pellet, goal, and collisions."""
+        if not self._alive:
+            return
+        self._tick_count += 1
+        head = self._worm[0].moved(self._heading)
+        new_head = self._clamp_head(head)
+        if new_head is None:
+            return
