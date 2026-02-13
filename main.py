@@ -138,3 +138,17 @@ class NokiaClassics:
         ]
         self._tick_count: int = 0
 
+    @property
+    def config(self) -> RasterConfig:
+        return self._cfg
+
+    @property
+    def score(self) -> int:
+        return self._score
+
+    @property
+    def alive(self) -> bool:
+        return self._alive
+
+    @property
+    def worm_segments(self) -> tuple[Segment, ...]:
