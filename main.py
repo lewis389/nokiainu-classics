@@ -306,3 +306,12 @@ def main() -> None:
             game.turn_right()
         if step in (8, 9):
             game.turn_left()
+        game.tick()
+        print(f"Score: {game.score}  Goal hits: {game.goal_reached_count}  Alive: {game.alive}")
+        print("\n".join(game.raster_lines()))
+        print("---")
+    print("Done.", game.score, "points.")
+
+
+if __name__ == "__main__":
+    main()
