@@ -26,3 +26,17 @@ PLATFORM_ROWS: tuple[int, ...] = (2, 6, 10, 14, 18, 22, 26)
 LADDER_COLS: tuple[tuple[int, int, int], ...] = (
     (4, 2, 26),
     (12, 2, 26),
+    (20, 2, 26),
+    (28, 2, 26),
+)
+GOAL_POS: tuple[int, int] = (18, 2)
+BARREL_STARTS: tuple[tuple[int, int, int], ...] = (
+    (2, 2, 1),
+    (34, 6, -1),
+    (4, 10, 1),
+    (32, 14, -1),
+    (8, 18, 1),
+    (28, 22, -1),
+)
+
+
