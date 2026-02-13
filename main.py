@@ -194,3 +194,17 @@ class NokiaClassics:
             return False
         if on_platform and to_platform and cur.y == ny:
             return True
+        if on_platform and to_ladder:
+            return True
+        if on_ladder and to_platform and cur.x == nx:
+            return True
+        return False
+
+    def _clamp_head(self, s: Segment) -> Segment | None:
+        nx = s.x
+        ny = s.y
+        if self._can_move_to(self._worm[0], nx, ny):
+            return Segment(nx, ny)
+        return None
+
+    def _collides_self(self, head: Segment) -> bool:
