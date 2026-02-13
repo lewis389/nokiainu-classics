@@ -124,3 +124,17 @@ class NokiaClassics:
     """
 
     def __init__(self, config: RasterConfig | None = None):
+        self._cfg: RasterConfig = config or RasterConfig()
+        self._worm: list[Segment] = [
+            Segment(SEGMENT_INIT_X, SEGMENT_INIT_Y),
+        ]
+        self._heading: Dir = Dir.NORTH
+        self._score: int = 0
+        self._pellet: Segment = Segment(PELLET_SEED_X, PELLET_SEED_Y)
+        self._alive: bool = True
+        self._goal_reached: int = 0
+        self._barrels: list[Barrel] = [
+            Barrel(x, y, dx) for x, y, dx in BARREL_STARTS
+        ]
+        self._tick_count: int = 0
+
