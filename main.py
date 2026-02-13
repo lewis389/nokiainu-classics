@@ -236,3 +236,17 @@ class NokiaClassics:
         if new_head.x == self._pellet.x and new_head.y == self._pellet.y:
             self._score += self._cfg.score_per_pellet
             self._spawn_pellet()
+        else:
+            self._worm.pop()
+        if self._tick_count % self._cfg.barrel_tick_interval == 0:
+            self._barrels = [b.tick(self._cfg) for b in self._barrels]
+            if self._collides_barrel(self._worm[0]):
+                self._alive = False
+
+    def _spawn_pellet(self) -> None:
+        """Place pellet on a valid cell not occupied by the worm."""
+        hsh = hash(self._cfg.bounds_salt + bytes(self._score))
+        w, hg = self._cfg.width, self._cfg.height
+        for i in range(w * hg):
+            px = (hsh + i * 17) % w
+            py = (hsh + i * 13) % hg
