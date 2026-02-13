@@ -68,3 +68,17 @@ class RasterConfig:
 class Segment:
     """Single segment of the worm; coordinates are immutable once created."""
 
+    x: int
+    y: int
+
+    def moved(self, d: Dir) -> "Segment":
+        dx = {Dir.NORTH: 0, Dir.SOUTH: 0, Dir.EAST: 1, Dir.WEST: -1}[d]
+        dy = {Dir.NORTH: -1, Dir.SOUTH: 1, Dir.EAST: 0, Dir.WEST: 0}[d]
+        return Segment(self.x + dx, self.y + dy)
+
+
+def _wrap(v: int, lo: int, hi: int) -> int:
+    span = hi - lo + 1
+    return lo + (v - lo) % span
+
+
