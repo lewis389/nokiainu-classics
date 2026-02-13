@@ -278,3 +278,17 @@ class NokiaClassics:
         for y in range(hg):
             row = []
             for x in range(w):
+                if (x, y) in body:
+                    row.append("@")
+                elif (x, y) in barrel_set:
+                    row.append("O")
+                elif x == px and y == py:
+                    row.append("*")
+                elif x == gx and y == gy:
+                    row.append("P")
+                elif _is_ladder_cell(self._cfg, x, y):
+                    row.append("H")
+                elif _is_platform_row(self._cfg, y):
+                    row.append("=")
+                else:
+                    row.append(" ")
