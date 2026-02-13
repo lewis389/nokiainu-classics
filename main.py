@@ -180,3 +180,17 @@ class NokiaClassics:
             return
         self._heading = Dir((self._heading + 1) % 4)
 
+    def _can_move_to(self, head: Segment, nx: int, ny: int) -> bool:
+        if not _is_valid_cell(self._cfg, nx, ny):
+            return False
+        cur = head
+        on_ladder = _is_ladder_cell(self._cfg, cur.x, cur.y)
+        on_platform = _is_platform_row(self._cfg, cur.y)
+        to_ladder = _is_ladder_cell(self._cfg, nx, ny)
+        to_platform = _is_platform_row(self._cfg, ny)
+        if on_ladder and to_ladder:
+            return True
+        if on_ladder and to_platform and ny != cur.y:
+            return False
+        if on_platform and to_platform and cur.y == ny:
+            return True
