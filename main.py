@@ -264,3 +264,17 @@ class NokiaClassics:
         """Current tick delay in ms (decreases as score rises)."""
         step = (self._cfg.tick_ms - self._cfg.tick_ms_min) // 14
         return max(
+            self._cfg.tick_ms_min,
+            self._cfg.tick_ms - (self._score // max(1, self._cfg.score_per_pellet)) * step,
+        )
+
+    def raster_lines(self) -> Iterator[str]:
+        """Yield lines of ASCII raster (Nokia-style grid with platforms, ladders, barrels, goal)."""
+        w, hg = self._cfg.width, self._cfg.height
+        body = {(s.x, s.y) for s in self._worm}
+        barrel_set = {(b.x, b.y) for b in self._barrels}
+        px, py = self._pellet.x, self._pellet.y
+        gx, gy = self._cfg.goal_pos
+        for y in range(hg):
+            row = []
+            for x in range(w):
