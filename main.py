@@ -82,3 +82,17 @@ def _wrap(v: int, lo: int, hi: int) -> int:
     return lo + (v - lo) % span
 
 
+def _is_platform_row(cfg: RasterConfig, y: int) -> bool:
+    return y in cfg.platform_rows
+
+
+def _is_ladder_cell(cfg: RasterConfig, x: int, y: int) -> bool:
+    for lx, y_lo, y_hi in cfg.ladder_cols:
+        if x == lx and y_lo <= y <= y_hi:
+            return True
+    return False
+
+
+def _is_valid_cell(cfg: RasterConfig, x: int, y: int) -> bool:
+    if not (0 <= x < cfg.width and 0 <= y < cfg.height):
+        return False
