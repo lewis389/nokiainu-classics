@@ -40,3 +40,17 @@ BARREL_STARTS: tuple[tuple[int, int, int], ...] = (
 )
 
 
+class Dir(IntEnum):
+    NORTH = 0
+    EAST = 1
+    SOUTH = 2
+    WEST = 3
+
+
+@dataclass(frozen=True)
+class RasterConfig:
+    """Immutable grid and timing config for Nokia Classics raster."""
+
+    width: int = RASTER_W
+    height: int = RASTER_H
+    tick_ms: int = TICK_MS_BASE
