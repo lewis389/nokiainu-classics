@@ -250,3 +250,17 @@ class NokiaClassics:
         for i in range(w * hg):
             px = (hsh + i * 17) % w
             py = (hsh + i * 13) % hg
+            if not _is_valid_cell(self._cfg, px, py):
+                continue
+            if not any(s.x == px and s.y == py for s in self._worm):
+                self._pellet = Segment(px, py)
+                return
+        self._pellet = Segment(
+            self._cfg.goal_pos[0],
+            self._cfg.goal_pos[1],
+        )
+
+    def tick_ms_for_score(self) -> int:
+        """Current tick delay in ms (decreases as score rises)."""
+        step = (self._cfg.tick_ms - self._cfg.tick_ms_min) // 14
+        return max(
