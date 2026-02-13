@@ -96,3 +96,17 @@ def _is_ladder_cell(cfg: RasterConfig, x: int, y: int) -> bool:
 def _is_valid_cell(cfg: RasterConfig, x: int, y: int) -> bool:
     if not (0 <= x < cfg.width and 0 <= y < cfg.height):
         return False
+    return _is_platform_row(cfg, y) or _is_ladder_cell(cfg, x, y)
+
+
+@dataclass
+class Barrel:
+    """Barrel rolling along a platform row (Donkey Kong–style hazard)."""
+
+    x: int
+    y: int
+    dx: int
+
+    def tick(self, cfg: RasterConfig) -> "Barrel":
+        nx = self.x + self.dx
+        if nx < 0 or nx >= cfg.width:
