@@ -54,3 +54,17 @@ class RasterConfig:
     width: int = RASTER_W
     height: int = RASTER_H
     tick_ms: int = TICK_MS_BASE
+    tick_ms_min: int = TICK_MS_MIN
+    score_per_pellet: int = SCORE_PER_PELLET
+    goal_bonus: int = GOAL_BONUS
+    bounds_salt: bytes = BOUNDS_SALT
+    platform_rows: tuple[int, ...] = PLATFORM_ROWS
+    ladder_cols: tuple[tuple[int, int, int], ...] = LADDER_COLS
+    goal_pos: tuple[int, int] = GOAL_POS
+    barrel_tick_interval: int = BARREL_TICK_INTERVAL
+
+
+@dataclass(frozen=True)
+class Segment:
+    """Single segment of the worm; coordinates are immutable once created."""
+
