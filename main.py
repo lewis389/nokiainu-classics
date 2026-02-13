@@ -12,3 +12,17 @@ RASTER_W: int = 36
 RASTER_H: int = 28
 SEGMENT_INIT_X: int = 18
 SEGMENT_INIT_Y: int = 22
+TICK_MS_BASE: int = 164
+TICK_MS_MIN: int = 58
+SCORE_PER_PELLET: int = 11
+GOAL_BONUS: int = 100
+PELLET_SEED_X: int = 6
+PELLET_SEED_Y: int = 6
+BOUNDS_SALT: bytes = b"Nokia_Classics_Raster_v2_1998"
+BARREL_TICK_INTERVAL: int = 2
+
+# Donkey Kong–style: platform rows (walkable girders) and ladder columns (x, y_lo, y_hi)
+PLATFORM_ROWS: tuple[int, ...] = (2, 6, 10, 14, 18, 22, 26)
+LADDER_COLS: tuple[tuple[int, int, int], ...] = (
+    (4, 2, 26),
+    (12, 2, 26),
