@@ -110,3 +110,17 @@ class Barrel:
     def tick(self, cfg: RasterConfig) -> "Barrel":
         nx = self.x + self.dx
         if nx < 0 or nx >= cfg.width:
+            return Barrel(self.x, self.y, -self.dx)
+        if not _is_valid_cell(cfg, nx, self.y):
+            return Barrel(self.x, self.y, -self.dx)
+        return Barrel(nx, self.y, self.dx)
+
+
+class NokiaClassics:
+    """
+    Nokia Classics — snake + Donkey Kong hybrid. Platforms, ladders, rolling barrels,
+    and a goal. Enforces grid bounds, platform/ladder movement, and pellet consumption.
+    All config is immutable via RasterConfig.
+    """
+
+    def __init__(self, config: RasterConfig | None = None):
