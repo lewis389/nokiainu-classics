@@ -152,3 +152,17 @@ class NokiaClassics:
 
     @property
     def worm_segments(self) -> tuple[Segment, ...]:
+        return tuple(self._worm)
+
+    @property
+    def pellet_position(self) -> Segment:
+        return self._pellet
+
+    @property
+    def goal_position(self) -> tuple[int, int]:
+        return self._cfg.goal_pos
+
+    @property
+    def goal_reached_count(self) -> int:
+        return self._goal_reached
+
