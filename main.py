@@ -292,3 +292,17 @@ class NokiaClassics:
                     row.append("=")
                 else:
                     row.append(" ")
+            yield "".join(row)
+
+
+def main() -> None:
+    """Run a short deterministic demo of Nokia Classics."""
+    cfg = RasterConfig()
+    game = NokiaClassics(cfg)
+    for step in range(24):
+        if not game.alive:
+            break
+        if step in (2, 3, 4, 5):
+            game.turn_right()
+        if step in (8, 9):
+            game.turn_left()
